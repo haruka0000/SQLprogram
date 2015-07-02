@@ -1,0 +1,39 @@
+/home/haruka/.rvm/rubies/ruby-2.2.1/bin/ruby -r ./siteconf20150702-73271-mu9glv.rb extconf.rb
+checking for main() in -lpthread... yes
+creating Makefile
+
+make "DESTDIR=" clean
+
+make "DESTDIR="
+compiling locker.cc
+compiling constraints.cc
+compiling heap.cc
+compiling v8.cc
+compiling value.cc
+compiling external.cc
+compiling object.cc
+compiling primitive.cc
+compiling gc.cc
+compiling constants.cc
+compiling handles.cc
+compiling context.cc
+compiling function.cc
+compiling signature.cc
+compiling rr.cc
+compiling string.cc
+compiling message.cc
+compiling array.cc
+compiling stack.cc
+compiling template.cc
+compiling init.cc
+compiling accessor.cc
+compiling exception.cc
+compiling invocation.cc
+compiling date.cc
+compiling trycatch.cc
+compiling backref.cc
+compiling script.cc
+linking shared-object v8/init.so
+
+make "DESTDIR=" install
+/usr/bin/install -m 0755 init.so ./.gem.20150702-73271-1enouzv/v8

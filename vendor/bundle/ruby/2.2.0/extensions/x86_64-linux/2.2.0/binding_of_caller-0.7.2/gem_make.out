@@ -1,0 +1,12 @@
+/home/haruka/.rvm/rubies/ruby-2.2.1/bin/ruby -r ./siteconf20150702-73038-102q8kk.rb extconf.rb
+
+make "DESTDIR=" clean
+make: *** No rule to make target 'clean'.  中止.
+
+make "DESTDIR="
+echo "Nada."
+Nada.
+
+make "DESTDIR=" install
+echo "Nada."
+Nada.
