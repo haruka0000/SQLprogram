@@ -1,12 +1,3 @@
-#coading:utf-8
-require'sqlite3'
-require'tk'
-
-$dbdata = "Evacuation.db"
-$data1=nil
-$tree=nil
-
-print "実行中["
 def earthquake
 	#database open
 	db = SQLite3::Database.new($dbdata)
@@ -197,26 +188,26 @@ def inlandwaters
 end
 
 
+def makeTable()
+    earthquake
+    print "\n1 finish!! \n"
 
-earthquake
-print "\n1 finish!! \n"
+    tsunami
+    print "\n2 finish!! \n"
 
-tsunami
-print "\n2 finish!! \n"
+    flood
+    print "\n3 finish!! \n"
 
-flood
-print "\n3 finish!! \n"
+    surge
+    print "\n4 finish!! \n"
 
-surge
-print "\n4 finish!! \n"
+    landslide
+    print "\n5 finish!! \n"
 
-landslide
-print "\n5 finish!! \n"
+    fire
+    print "\n6 finish!! \n"
 
-fire
-print "\n6 finish!! \n"
+    inlandwaters
+    print "\n7 finish!! \n"
 
-inlandwaters
-print "\n7 finish!! \n"
-
-
+end

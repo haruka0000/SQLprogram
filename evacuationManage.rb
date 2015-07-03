@@ -1,7 +1,7 @@
 # coading:utf-8
 require'sqlite3'
 require'tk'
-
+require'./makeEvacuation.rb'
 
 $dbdata = "Evacuation.db"
 $data1=nil
@@ -71,6 +71,29 @@ def selectall
     return $data1
 end
 
+#delete
+def del(evac)
+    #database open
+    db = SQLite3::Database.new($dbdata)
+
+    #sql code
+    sql = "delete from 避難所 where 建物名='#{evac}';"
+    db.execute(sql)
+    db.close
+end
+
+def inserts(en01,en02,en03,en04,en05,en06,en07,en08,en09)
+    #database open
+    db = SQLite3::Database.new($dbdata)
+
+    #sql code
+    sql = "insert into 避難所 values('#{en01}','#{en02}','#{en03}','#{en04}','#{en05}','#{en06}','#{en07}','#{en08}','#{en09}');"
+    
+    db.execute(sql)
+    db.close
+end
+
+
 
 #treeview
 def view(data1)
@@ -94,7 +117,6 @@ $frame_select = TkFrame.new(window)
 $frame_insert = TkFrame.new(window)
 $frame_delete = TkFrame.new(window)
 $frame_update = TkFrame.new(window)
-
 $tree = Ttk::Treeview.new($frame_tree, show: :headings).pack
 
 $tree ['columns'] = 'evac address earthquake tsunami flood surge landslide fire inlandwaters'
@@ -114,6 +136,7 @@ end
 $frame_first.pack
 
 
+view(selectall);
 button_back = TkButton.new($frame_tree,"text"=>"戻る").bg("red").pack
 button_back.command = proc {
         $frame_first.pack
@@ -132,7 +155,27 @@ button_sel.command = proc {
         $frame_select.pack
         $frame_insert.unpack
 }
+# 登録用画面切り替えボタン
+button_in = TkButton.new($frame_first,"text"=>"登録").pack
+# 登録ボタンが押されたときの処理
+button_in.command = proc {
+        $tree.delete($tree.children(nil));
+        view(selectall);
+        $frame_first.unpack
+        $frame_select.unpack
+        $frame_insert.pack
+}
 
+# 削除用画面切り替えボタン
+button_del = TkButton.new($frame_first,"text"=>"削除").pack
+# 削除ボタンが押されたときの処理
+button_del.command = proc {
+        $tree.delete($tree.children(nil));
+        view(selectall);
+        $frame_first.unpack
+        $frame_select.unpack
+        $frame_delete.pack
+}
 
 # 全検索実行ボタン
 button_all = TkButton.new($frame_first,"text"=>"全検索実行").bg("green").pack
@@ -155,6 +198,55 @@ button.command=proc{
         $tree.delete($tree.children(nil));
             view(select(entry.value));
 }
+
+$frame_delete.unpack
+#delete
+TkLabel.new($frame_delete, 'text'=>'削除する建物名を入力してください').pack
+del_entry=TkEntry.new($frame_delete).pack
+#
+del_button=TkButton.new($frame_delete,"text"=>"DELETE!!").pack
+#
+del_button.command=proc{
+        $tree.delete($tree.children(nil));
+        del(del_entry.value);
+        view(selectall);
+}
+
+$frame_insert.unpack
+
+#entries
+TkLabel.new($frame_insert, 'text'=>'建物名').pack
+entry01=TkEntry.new($frame_insert).pack
+TkLabel.new($frame_insert, 'text'=>'住所').pack
+entry02=TkEntry.new($frame_insert).pack
+TkLabel.new($frame_insert, 'text'=>'地震').pack
+entry03=TkEntry.new($frame_insert).pack
+TkLabel.new($frame_insert, 'text'=>'津波').pack
+entry04=TkEntry.new($frame_insert).pack
+TkLabel.new($frame_insert, 'text'=>'洪水').pack
+entry05=TkEntry.new($frame_insert).pack
+TkLabel.new($frame_insert, 'text'=>'高潮').pack
+entry06=TkEntry.new($frame_insert).pack
+TkLabel.new($frame_insert, 'text'=>'土砂').pack
+entry07=TkEntry.new($frame_insert).pack
+TkLabel.new($frame_insert, 'text'=>'火事').pack
+entry08=TkEntry.new($frame_insert).pack
+TkLabel.new($frame_insert, 'text'=>'内水').pack
+entry09=TkEntry.new($frame_insert).pack
+insert_button=TkButton.new($frame_insert,"text"=>"INSERT!!").pack
+#
+insert_button.command=proc{
+        $tree.delete($tree.children(nil));
+        inserts(entry01.value, entry02.value, entry03.value, entry04.value, entry05.value, entry06.value, entry07.value, entry08.value, entry09.value);
+        view(selectall);
+}
+
+button_maketbl = TkButton.new($frame_tree,"text"=>"テーブル構築").bg("yellow").pack
+button_maketbl.command = proc {
+    makeTable()
+    view(selectall)
+}
+
 
 #disp
 Tk.mainloop
