@@ -7,5 +7,7 @@ class HomeController < ApplicationController
   end
 
   def show
+    @evacuations = Evacuation.all
+
   end
 end

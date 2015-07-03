@@ -5,3 +5,20 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+
+@evacuation = Evacuation.new
+@evacuation.evac = 'ANCT'
+@evacuation.address = 'ANAN'
+@evacuation.earthquake = 'OK'
+@evacuation.tsunami = 'OK'
+@evacuation.flood = 'OK'
+@evacuation.surge = 'OK'
+@evacuation.landslide = 'OK'
+@evacuation.fire = 'OK'
+@evacuation.inlandwaters = 'OK'
+
+
+
+
+
