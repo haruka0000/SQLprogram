@@ -1,0 +1,15 @@
+/home/haruka/.rvm/rubies/ruby-2.2.1/bin/ruby -r ./siteconf20150703-4013-hvh6tx.rb extconf.rb
+creating Makefile
+
+make "DESTDIR=" clean
+
+make "DESTDIR="
+compiling bcrypt_ext.c
+compiling crypt.c
+compiling crypt_gensalt.c
+compiling crypt_blowfish.c
+compiling wrapper.c
+linking shared-object bcrypt_ext.so
+
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 bcrypt_ext.so ./.gem.20150703-4013-1q7d4vq
