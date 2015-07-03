@@ -113,6 +113,27 @@ end
 # 初期画面設定(最初は表示)
 $frame_first.pack
 
+
+button_back = TkButton.new($frame_tree,"text"=>"戻る").bg("red").pack
+button_back.command = proc {
+        $frame_first.pack
+        $frame_select.unpack
+        $frame_insert.unpack
+        $frame_delete.unpack
+        $frame_update.unpack
+}
+# 条件検索用画面切り替えボタン
+button_sel = TkButton.new($frame_first,"text"=>"条件検索").pack
+# 条件検索ボタンが押されたときの処理
+button_sel.command = proc {
+        $tree.delete($tree.children(nil));
+        view(selectall);
+        $frame_first.unpack
+        $frame_select.pack
+        $frame_insert.unpack
+}
+
+
 # 全検索実行ボタン
 button_all = TkButton.new($frame_first,"text"=>"全検索実行").bg("green").pack
 # 全検索実行ボタンが押されたときの処理
@@ -120,5 +141,20 @@ button_all.command = proc {
         $tree.delete($tree.children(nil));  # Treeviewデータをクリア
         view(selectall);
 }
+
+# 条件検索用の画面準備(最初は非表示)
+$frame_select.unpack
+# entry
+TkLabel.new($frame_select, 'text'=>'検索する建物名を入力してください').pack
+#
+entry=TkEntry.new($frame_select).pack
+#
+button=TkButton.new($frame_select,"text"=>"検索実行").pack
+#
+button.command=proc{
+        $tree.delete($tree.children(nil));
+            view(select(entry.value));
+}
+
 #disp
 Tk.mainloop
